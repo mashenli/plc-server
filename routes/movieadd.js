@@ -138,9 +138,62 @@ router.post('/admin/deleteProduct', function (req, res) {
     }
   });
 });
-
-
-
+//添加管理员
+router.post('/admin/addAdmin', function (req, res) {
+  let selectString = "select * from admin where phoneNum='" + req.body.phoneNum + "'";
+  let insertString = "insert into admin(phoneNum,name,password) values('" + req.body.phoneNum + "','" + req.body.name + "','" + req.body.phoneNum + "')";
+  // // code: 0:添加成功   1：err   2:模块存在
+  let json = { code: 0 }
+  db.query(selectString, function (err, rows) {
+    if (err) {
+      res.send(err);
+    } else {
+      if (rows.length > 0) {
+        json = { code: 2 }
+        res.send(json)
+      }
+      else {
+        db.query(insertString, function (err, rows) {
+          if (err) {
+            res.send(err);
+          } else {
+            res.send(json)
+          }
+        });
+      }
+    }
+  });
+});
+//删除管理员
+router.post('/admin/deleteAdmin', function (req, res) {
+  let selectString = "DELETE FROM admin WHERE phoneNum ='" + req.body.phoneNum + "'";
+  // // code: 0:删除成功   1：err
+  let json = { code: 0 }
+  db.query(selectString, function (err, rows) {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(json)
+    }
+  });
+});
+//查看管理员
+router.get('/admin/fetch/admin', function (req, res) {
+  let selectString = "select * from admin";
+  // // code: 0:添加成功   1：err   2:模块存在
+  let json = { code: 0 }
+  db.query(selectString, function (err, rows) {
+    if (err) {
+      res.send(err);
+    } else {
+      let data = rows
+      data.forEach((item, index) => {
+        delete item.password
+      })
+      res.send(data);
+    }
+  });
+});
 
 
 

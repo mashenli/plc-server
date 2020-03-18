@@ -94,7 +94,9 @@ router.post('/admin/addProduct',require("./movieadd"));  //添加产品
 router.get('/admin/fetchClass',require("./movieadd"));//查询产品分类及模块
 router.post('/admin/modifyProduct',require("./movieadd"));//修改产品
 router.post('/admin/deleteProduct',require("./movieadd"));//删除产品
-router.get('/adindex/played',require("./movieadd"));
+router.post('/admin/addAdmin',require("./movieadd"));//添加管理员
+router.post('/admin/deleteAdmin',require("./movieadd"));//添加管理员
+router.get('/admin/fetch/admin',require("./movieadd"));//添加管理员
 router.post('/admin/addClass',require("./movieadd"));//添加模块
 
 
