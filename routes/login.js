@@ -31,12 +31,12 @@ router.post('/admin/login', function (req, res, next) {
       if (rows.length == 0) {
         res.send({'code':0});
       } else if (rows[0].password == req.body.password) {
-        console.log(req.session);
         code = 1
-        req.session.username = req.body.username;
-        res.send({'code':1})
-        // res.redirect('bossindex');
-        // console.log(req.session);  //登录成功，返回用户的全部信息
+        let type = rows[0].identify
+        let json = {}
+        json.type = type
+        json.code = code
+        res.send(json)
       } else {
         code = 2
         res.send({'code':2});

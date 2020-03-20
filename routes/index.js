@@ -64,7 +64,7 @@ router.get('/movie/:id',require("./movie"));
 router.post('/movie/:id',require("./movie"));
 /*后台系统登录界面*/
 router.get('/login',require("./login"));
-router.post('/admin/login',require("./login")); //管理员登录接口
+
 /*经理页面*/
 
 router.get('/bossindex',require("./bossindex"));
@@ -88,7 +88,7 @@ router.post('/adindex/movielist',require("./movielist"));
 router.get('/adindex/movieadd',require("./movieadd"));
 router.post('/adindex/movieadd',require("./movieadd"));
 
-
+router.post('/admin/login',require("./login")); //管理员登录接口
 router.post('/admin/fetch/sort',require("./movieadd"));  //查询模块下产品
 router.post('/admin/addProduct',require("./movieadd"));  //添加产品
 router.get('/admin/fetchClass',require("./movieadd"));//查询产品分类及模块
