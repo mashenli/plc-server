@@ -12,6 +12,9 @@ router.get('/bossindex', function(req, res) {
         console.log(name);
     }else{
         res.redirect('../login',302);
+
+
+        
     }
     
 
