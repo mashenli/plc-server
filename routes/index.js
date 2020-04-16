@@ -98,6 +98,7 @@ router.post('/admin/addAdmin',require("./movieadd"));//添加管理员
 router.post('/admin/deleteAdmin',require("./movieadd"));//删除管理员
 router.get('/admin/fetch/admin',require("./movieadd"));//查看管理员
 router.post('/admin/addClass',require("./movieadd"));//添加模块
+router.post('/fetch/product',require("./movieadd"));//查询产品
 
 
 

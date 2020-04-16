@@ -194,7 +194,24 @@ router.get('/admin/fetch/admin', function (req, res) {
     }
   });
 });
-
+//查询产品
+router.post('/fetch/product', function (req, res, next) {
+  let selectString = ''
+  if (req.body.class && req.body.sort) {
+    selectString = "select * from product where sort='" + req.body.sort + "' and classId = '" + req.body.class + "'";
+  }
+  else {
+    selectString = "select * from product where sort='" + req.body.sort + "'";
+  }
+  db.query(selectString, function (err, rows) {
+    if (err) {
+      res.send(err);
+    }
+    else {
+      res.send(rows)
+    }
+  });
+});
 
 
 
