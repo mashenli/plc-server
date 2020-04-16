@@ -7,12 +7,12 @@ var session = require('cookie-session');
 const querystring = require('querystring');
 
 
-router.get('/login', function (req, res, next) {
+router.post('/login', function (req, res, next) {
 
 
 
-  res.render('login', {});
-
+  // res.render('login', {});
+  res.send('123')
 
 
 });

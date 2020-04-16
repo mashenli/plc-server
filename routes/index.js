@@ -63,7 +63,7 @@ router.post('/posts/:moviename/:key/:item',require("./posts"));
 router.get('/movie/:id',require("./movie"));
 router.post('/movie/:id',require("./movie"));
 /*后台系统登录界面*/
-router.get('/login',require("./login"));
+router.post('/login',require("./login"));
 
 /*经理页面*/
 
@@ -95,14 +95,14 @@ router.get('/admin/fetchClass',require("./movieadd"));//查询产品分类及模
 router.post('/admin/modifyProduct',require("./movieadd"));//修改产品
 router.post('/admin/deleteProduct',require("./movieadd"));//删除产品
 router.post('/admin/addAdmin',require("./movieadd"));//添加管理员
-router.post('/admin/deleteAdmin',require("./movieadd"));//添加管理员
-router.get('/admin/fetch/admin',require("./movieadd"));//添加管理员
+router.post('/admin/deleteAdmin',require("./movieadd"));//删除管理员
+router.get('/admin/fetch/admin',require("./movieadd"));//查看管理员
 router.post('/admin/addClass',require("./movieadd"));//添加模块
 
 
 
 router.get('/user',require("./user"));
-router.post('/user',require("./user"));
+// router.post('/login',require("./user"));
 
 
 router.post('/users',require("./users"));
