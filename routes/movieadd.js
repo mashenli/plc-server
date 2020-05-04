@@ -22,6 +22,22 @@ router.post('/admin/fetch/sort', function (req, res, next) {
     }
   });
 });
+
+//查询所有订单
+router.post('/admin/fetch/bill', function (req, res, next) {
+  let selectString = "select * from bill";
+  if (req.body.phoneNum) {
+    selectString = "select * from bill where phoneNum = '" + req.body.phoneNum + "'";
+  }
+  db.query(selectString, function (err, rows) {
+    if (err) {
+      res.send(err);
+    }
+    else {
+      res.send(rows)
+    }
+  });
+});
 //查询模块
 router.get('/admin/fetchClass', function (req, res, next) {
   let selectString = "select * from class"
@@ -57,7 +73,7 @@ router.get('/admin/fetchClass', function (req, res, next) {
 });
 //添加产品
 router.post('/admin/addProduct', function (req, res) {
-  let insertString = "insert into product(classId,modular,productId,sort,`describe`) values('" + req.body.classId + "','" + req.body.modular + "','" + req.body.productId + "','" + req.body.sort + "','" + req.body.describe + "')";
+  let insertString = "insert into product(classId,modular,productId,sort,`describe`,price) values('" + req.body.classId + "','" + req.body.modular + "','" + req.body.productId + "','" + req.body.sort + "','" + req.body.describe + "','" + req.body.price + "')";
   let selectString = "select * from product where productId='" + req.body.productId + "'";
   // code: 0:插入成功   1：err   2:已存在
   let json = { code: 0 }
@@ -87,6 +103,30 @@ router.post('/admin/addProduct', function (req, res) {
 //修改产品
 router.post('/admin/modifyProduct', function (req, res) {
   let selectString = "UPDATE product SET modular = '" + req.body.modular + "',`describe` ='" + req.body.describe + "' WHERE productId ='" + req.body.productId + "'";
+  // // code: 0:修改成功   1：err   2:修改失败
+  let json = { code: 0 }
+  db.query(selectString, function (err, rows) {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(json)
+    }
+  });
+});
+//修改订单
+router.post('/admin/modifyBill', function (req, res) {
+  let selectString = ''
+  if (req.body.address && !req.body.state) {
+    selectString = "UPDATE bill SET address = '" + req.body.address + "'WHERE billId = '" + req.body.billId + "'";
+  }
+  else if (!req.body.address && req.body.state) {
+    // selectString = "UPDATE bill SET state = '" + req.body.state + "'WHERE billId = '" + req.body.billId + "'";
+    selectString = "UPDATE bill SET  `state` = '" + req.body.state + "' WHERE billId = '" + req.body.billId + "'";
+
+  }
+  else {
+    selectString = "UPDATE bill SET address = '" + req.body.address + "' , `state` = '" + req.body.state + "' WHERE billId = '" + req.body.billId + "'";
+  }
   // // code: 0:修改成功   1：err   2:修改失败
   let json = { code: 0 }
   db.query(selectString, function (err, rows) {

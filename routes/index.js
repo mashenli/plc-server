@@ -90,9 +90,11 @@ router.post('/adindex/movieadd',require("./movieadd"));
 
 router.post('/admin/login',require("./login")); //管理员登录接口
 router.post('/admin/fetch/sort',require("./movieadd"));  //查询模块下产品
+router.post('/admin/fetch/bill',require("./movieadd"));  //查询所有订单
 router.post('/admin/addProduct',require("./movieadd"));  //添加产品
 router.get('/admin/fetchClass',require("./movieadd"));//查询产品分类及模块
 router.post('/admin/modifyProduct',require("./movieadd"));//修改产品
+router.post('/admin/modifyBill',require("./movieadd"));//修改订单
 router.post('/admin/deleteProduct',require("./movieadd"));//删除产品
 router.post('/admin/addAdmin',require("./movieadd"));//添加管理员
 router.post('/admin/deleteAdmin',require("./movieadd"));//删除管理员
