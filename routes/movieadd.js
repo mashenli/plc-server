@@ -252,6 +252,20 @@ router.post('/fetch/product', function (req, res, next) {
     }
   });
 });
+//修改用户信息
+router.post('/modify/userInfo', function (req, res, next) {
+  let selectString = "UPDATE  user SET address='" + req.body.address + "' WHERE phoneNum='" + req.body.phoneNum + "'";
+  db.query(selectString, function (err, rows) {
+    if (err) {
+      res.send(err);
+    }
+    else {
+      let json = {}
+      json.code = 0
+      res.send(json)
+    }
+  });
+});
 
 
 
