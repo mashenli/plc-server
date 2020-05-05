@@ -266,8 +266,35 @@ router.post('/modify/userInfo', function (req, res, next) {
     }
   });
 });
-
-
+//用户修改密码
+router.post('/modify/password', function (req, res, next) {
+  let selectString = "UPDATE  user SET password='" + req.body.newPassword + "' WHERE phoneNum='" + req.body.phoneNum + "'";
+  db.query(selectString, function (err, rows) {
+    if (err) {
+      res.send(err);
+    }
+    else {
+      let json = {}
+      json.code = 0
+      res.send(json)
+    }
+  });
+});
+//购买产品
+router.post('/buyProduct', function (req, res, next) {
+  let billId = Date.parse(new Date());
+  let insertString = "insert into bill(billId,productId,phoneNum,`state`,address) values('" + billId + "','" + req.body.productId + "','" + req.body.phoneNum + "','" + req.body.state + "','" + req.body.address + "')";
+  db.query(insertString, function (err, rows) {
+    if (err) {
+      res.send(err);
+    }
+    else {
+      let json = {}
+      json.code = 0
+      res.send(json)
+    }
+  });
+});
 
 
 
