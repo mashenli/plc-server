@@ -104,6 +104,7 @@ router.get('/admin/fetch/admin',require("./movieadd"));//查看管理员
 router.post('/admin/addClass',require("./movieadd"));//添加模块
 router.post('/fetch/product',require("./movieadd"));//查询产品
 router.post('/buyProduct',require("./movieadd"));//用户购买
+router.post('/admin/fetch/year',require("./movieadd"));//查看管理员
 
 
 

@@ -296,6 +296,51 @@ router.post('/buyProduct', function (req, res, next) {
   });
 });
 
+//查询月销量
+router.post('/admin/fetch/year', function (req, res, next) {
+  let year = new Date().getFullYear()
+  let month = new Date().getMonth() + 1
+  let str = ''
+  let unique = function (arr) {
+    let x = new Set(arr)
+    return [...x]
+  }
+  if (month < 10) {
+    str = year + '-0' + month
+  }
+  else {
+    str = year + '-' + month
+  }
+  let selectString = "select t.* from bill t where date_format(t.time,'%Y-%m')='" + str + "'"
+  db.query(selectString, function (err, rows) {
+    if (err) {
+      res.send(err);
+    }
+    else {
+      let data = []
+      rows.map(item => {
+        data.push(item.productId)
+      })
+      data = unique(data)
+      // console.log(data)
+      let allData = {}
+      allData.data = []
+      allData.product = data
+      for (let i = 0; i < data.length; i++) {
+        let json = {}
+        json.value = 0
+        json.name = data[i]
+        for (let y = 0; y < rows.length; y++) {
+          if (data[i] == rows[y].productId) {
+            json.value += 1
+          }
+        }
+        allData.data.push(json)
+      }
+      res.send(allData)
+    }
+  })
+});
 
 
 
