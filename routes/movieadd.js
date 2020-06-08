@@ -289,9 +289,17 @@ router.post('/buyProduct', function (req, res, next) {
       res.send(err);
     }
     else {
-      let json = {}
-      json.code = 0
-      res.send(json)
+      let string = "UPDATE product SET stock= IF(`stock`<1, 0, `stock`-1) WHERE productId='" + req.body.productId + "'";
+      db.query(string, function (err, row) {
+        if (err) {
+          res.send(err)
+        }
+        else {
+          let json = {}
+          json.code = 0
+          res.send(json)
+        }
+      })
     }
   });
 });
@@ -342,7 +350,45 @@ router.post('/admin/fetch/year', function (req, res, next) {
   })
 });
 
+//查看库存
+router.post('/admin/fetch/stock', function (req, res, next) {
+  let selectString = ''
+  selectString = "select * from product"
+  db.query(selectString, function (err, rows) {
+    if (err) {
+      res.send(err)
+    }
+    else {
+      res.send(rows)
+    }
+  })
+});
+//添加库存
+router.post('/admin/addStock', function (req, res, next) {
+  console.log(req.body)
+  let selectString = "UPDATE product SET stock='" + req.body.num + "' WHERE productId='" + req.body.productId + "'";
+  db.query(selectString, function (err, rows) {
+    if (err) {
+      res.send(err);
+    }
+    else {
+      // console.log(rows)
+      res.send(rows)
+    }
+  });
+});
 
-
+router.post('/admin/fetch/lostStock', function (req, res, next) {
+  let selectString = ''
+  selectString = "select * from product where stock < 100";
+  db.query(selectString, function (err, rows) {
+    if (err) {
+      res.send(err)
+    }
+    else {
+      res.send(rows)
+    }
+  })
+});
 
 module.exports = router;

@@ -28,5 +28,8 @@ router.post('/admin/addClass',require("./movieadd"));//添加模块
 router.post('/fetch/product',require("./movieadd"));//查询产品
 router.post('/buyProduct',require("./movieadd"));//用户购买
 router.post('/admin/fetch/year',require("./movieadd"));//查看管理员
+router.post('/admin/fetch/stock',require("./movieadd"));//查看库存
+router.post('/admin/addStock',require("./movieadd"));//查看库存
+router.post('/admin/fetch/lostStock',require("./movieadd"));//查看库存
 
 module.exports = router;
